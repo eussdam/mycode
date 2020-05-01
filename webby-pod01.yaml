@@ -1,0 +1,18 @@
+---
+apiVersion: v1     # the apiVersion to use
+kind:       Pod    # example Pod / Deployment
+metadata:
+  name:     webbyservice     # name to apply
+  labels:
+    name:   webbyservice-web     # label name
+spec:
+  containers:
+  -
+    name:   webbyservice-web     # name of container
+    image:  reg.alta3.com/5065-azam-webby     # image to use if no URL provided hub.docker.com is used
+    ports:  
+     -
+       name: web      # port name
+       containerPort: 8888      # access on this port (int)
+       protocol: TCP     # TCP or UDP
+

@@ -1,0 +1,20 @@
+---
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: nginx-obj-create # A Deployment named nginx-deployment is created, indicated by the .metadata.name field.
+spec:
+  selector: # Defines how the Deployment finds which Pods to manage.
+    matchLabels:
+      app: nginx # A label that is defined in the Pod template (app: nginx)
+  replicas: 3 # tells Deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: nginx # The Pods are labeled 'app: nginx'
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.7.9   # image and version
+        ports:
+        - containerPort: 80 # Open port 80 so that the container can send and accept traffic

@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: fail01
+
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: failrq01
+  namespace: fail01
+spec:
+  hard:
+    cpu: "1"
+    memory: 1Gi
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: failingpods
+  namespace: fail01
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      status: failing
+  template:
+    metadata:
+      labels:
+        status: failing
+    spec:
+      containers:
+      - name: failcontainer
+        image: nginx
+        resources:
+          requests:
+            cpu: 400m
+            memory: 128Mi
